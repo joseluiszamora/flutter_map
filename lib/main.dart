@@ -8,6 +8,10 @@ void main() {
   runApp(MultiBlocProvider(
     providers: [
       BlocProvider(create: (context) => GpsBloc()),
+      BlocProvider(create: (context) => LocationBloc()),
+      BlocProvider(
+          create: (context) =>
+              MapBloc(locationBloc: BlocProvider.of<LocationBloc>(context))),
     ],
     child: const MyApp(),
   ));
@@ -21,7 +25,7 @@ class MyApp extends StatelessWidget {
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Maps App',
-      home: GpsAccessScreen(),
+      home: LoadingScreen(),
     );
   }
 }
